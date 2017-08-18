@@ -4,7 +4,16 @@ An [IOTA](https://iota.org) Client Library Implemented in Clojure
 
 ## Usage
 
-look in `src/clota/client.clj`
+```bash
+$ lein repl
+> (clojiota.client/get-node-info)
+> (clojiota.client/get-neighbors-activity)
+> (clojiota.client/get-tips)
+> ...
+```
+
+for more, look in `src/clota/client.clj`
+
 
 License
 
