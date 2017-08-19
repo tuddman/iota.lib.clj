@@ -2,6 +2,8 @@
 
 An [IOTA](https://iota.org) Client Library Implemented in Clojure
 
+[![Build Status](https://travis-ci.org/tuddman/iota.lib.clj.svg?branch=master)](https://travis-ci.org/tuddman/iota.lib.clj)
+
 This library aims to be an idiomatic, feature-complete, FULL client implementation of the IOTA API Command Set.
 
 
