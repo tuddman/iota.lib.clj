@@ -8,20 +8,21 @@
 (def fields
   #{"seed" "address" "message" "transaction" "trytes" "hash" "bundles" "addresses" "tags" "approvees" "securityLevel" "minWeightMagnitude" "uris"})
 
-(def iota-hostname "http://localhost:14265")
+(def iota-localhost "http://localhost:14265")
 
 ;; from https://iota.readme.io/docs
 
 (defn get-iota-version [] (json/encode {:version "1.2.0"}))
 
-(defn- build-iota-command-req
+(defn- build-iota-req
   "params 
     - command { String }
     - params { Map } Optional "
-  [command & [params]]
-  (let [req-body { :command command }
+  [{:keys [host command]} & [params]]
+  (let [hostname (or host iota-localhost)
+        req-body { :command command }
         body (json/encode (merge req-body (or params {})))
-        req (try (client/post (str  iota-hostname)
+        req (try (client/post (str hostname)
                               {:body body
                                :content-type :json})
                  (catch Exception e (ex-data e)))]
@@ -29,45 +30,56 @@
         :body
         (json/decode true))))
 
-(defn get-node-info []          
-  (build-iota-command-req "getNodeInfo"))
+(defn get-node-info 
+  [host]          
+  (build-iota-req {:host host
+                   :command "getNodeInfo"}))
 
-(defn get-neighbors [] 
-  (build-iota-command-req "getNeighbors"))
+(defn get-neighbors 
+  [host] 
+  (build-iota-req {:host host
+                   :command "getNeighbors"}))
 
-(defn add-neighbors [] 
-  (build-iota-command-req "addNeighbors"))
+(defn add-neighbors 
+  [{:keys [host neighbors]}] 
+  (build-iota-req {:host host
+                   :command "addNeighbors"}
+                  neighbors))
 
-(defn remove-neighbors [] 
-  (build-iota-command-req "removeNeighbors"))
+(defn remove-neighbors
+  [{:keys [host neighbors]}] 
+  (build-iota-req "removeNeighbors"))
 
-(defn get-tips [] 
-  (build-iota-command-req "getTips"))
+(defn get-tips 
+  [host] 
+  (build-iota-req {:host host
+                   :command "getTips"}))
 
-(defn find-transactions [] 
-  (build-iota-command-req "findTransactions"))
+(defn find-transactions 
+  [] 
+  (build-iota-req "findTransactions"))
  
 (defn get-trytes [] 
-  (build-iota-command-req "getTrytes"))
+  (build-iota-req "getTrytes"))
 
 (defn get-inclusion-states [] 
-  (build-iota-command-req "getInclusionStates"))
+  (build-iota-req "getInclusionStates"))
 
 (defn get-balances [] 
-  (build-iota-command-req "getBalances"))
+  (build-iota-req "getBalances"))
 
 (defn get-transactions-to-approve [] 
-  (build-iota-command-req "getTransactionsToApprove"))
+  (build-iota-req "getTransactionsToApprove"))
 
 (defn attach-to-tangle [] 
-  (build-iota-command-req "attachToTangle"))
+  (build-iota-req "attachToTangle"))
 
 (defn interrupt-attaching-to-tangle [] 
-  (build-iota-command-req "interruptAttachingToTangle"))
+  (build-iota-req "interruptAttachingToTangle"))
 
 (defn broadcast-transactions [] 
-  (build-iota-command-req "broadcastTransactions"))
+  (build-iota-req "broadcastTransactions"))
 
 (defn store-transactions [] 
-  (build-iota-command-req "storeTransactions"))
+  (build-iota-req "storeTransactions"))
 
