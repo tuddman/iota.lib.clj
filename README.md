@@ -17,9 +17,11 @@ lein deps
 
 ```bash
 $ lein repl
-> (clojiota.client/get-node-info)
-> (clojiota.client/get-neighbors)
-> (clojiota.client/get-tips)
+> (def host "http://0.0.0.0:14625")
+> (require '[clojiota.client :as iota])
+> (iota/get-node-info host)
+> (iota/get-neighbors host)
+> (iota/get-tips host)
 > ...
 ```
 
