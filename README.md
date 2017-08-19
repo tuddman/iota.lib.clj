@@ -5,19 +5,26 @@ An [IOTA](https://iota.org) Client Library Implemented in Clojure
 This library aims to be an idiomatic, feature-complete, FULL client implementation of the IOTA API Command Set.
 
 
+## Getting Started
+
+```bash
+git clone https://github.com/tuddman/iota.lib.clj
+cd iota.lib.clj
+lein deps
+```
 
 ## Usage
 
 ```bash
 $ lein repl
 > (clojiota.client/get-node-info)
-> (clojiota.client/get-neighbors-activity)
+> (clojiota.client/get-neighbors)
 > (clojiota.client/get-tips)
 > ...
 ```
 
 API Command | Clota Function | Status | Test Coverage
---- | --- | ---
+--- | --- | --- | ---
 `getNodeInfo` | `(get-node-info ...)` | Implemented | Complete
 `getNeighbors` | `(get-neighbors ...)` | Implemented | Complete
 `addNeighbors` | `(add-neighbors ...)` | Not Yet Implemented | None
