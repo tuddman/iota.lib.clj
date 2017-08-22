@@ -39,16 +39,16 @@
                    :command "getNeighbors"}))
 
 (defn add-neighbors 
-  [host {:keys [neighbors] :as params}] 
+  [host {:keys [addresses] :as params}] 
   (build-iota-req {:host host
                    :command "addNeighbors"}
-                  {:uris neighbors}))
+                  {:uris addresses}))
 
 (defn remove-neighbors
-  [host {:keys [neighbors] :as params}] 
+  [host {:keys [addresses] :as params}] 
   (build-iota-req {:host host
-                   :command "removeNeighbors"})
-                  {:uris neighbors})
+                   :command "removeNeighbors"}
+                  {:uris addresses}))
 
 (defn get-tips 
   [host] 

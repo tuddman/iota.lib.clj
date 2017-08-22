@@ -49,9 +49,9 @@ API Command | Clota Function | Status | Test Coverage
 --- | --- | --- | ---
 `getNodeInfo` | `(get-node-info ...)` | Implemented | Complete
 `getNeighbors` | `(get-neighbors ...)` | Implemented | Complete
-`addNeighbors` | `(add-neighbors ...)` | Implemented | None
-`removeNeighbors` | `(remove-neighbors ...)` | Implemented | None
-`getTips` | `(get-tips ...)` | Implemented | None
+`addNeighbors` | `(add-neighbors ...)` | Implemented | Complete
+`removeNeighbors` | `(remove-neighbors ...)` | Implemented | Complete
+`getTips` | `(get-tips ...)` | Implemented | Complete
 `findTransactions` | `(find-transactions ...)` | Implemented | None
 `getTrytes` | `(get-trytes ...)` | Implemented | None
 `getInclusionStates` | `(get-inclusion-states ...)` | Implemented | None
