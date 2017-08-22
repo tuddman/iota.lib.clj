@@ -39,16 +39,16 @@
                    :command "getNeighbors"}))
 
 (defn add-neighbors 
- [host {:keys [addresses] :as params}] 
+ [host [uris]] 
   (build-iota-req {:host host
                    :command "addNeighbors"}
-                  {:uris addresses}))
+                  {:uris [uris]}))
 
 (defn remove-neighbors
-  [host {:keys [addresses] :as params}] 
+  [host [uris]] 
   (build-iota-req {:host host
                    :command "removeNeighbors"}
-                  {:uris addresses}))
+                  {:uris [uris]}))
 
 (defn get-tips 
   [host] 
@@ -70,10 +70,10 @@
  
 (defn get-trytes 
   "@param trytes : List of transaction hashes of which you want to get trytes from."
-  [host {:keys [trytes] :as params}] 
+  [host [trytes]] 
   (build-iota-req {:host host
                    :command "getTrytes"}
-                  {:hashes trytes}))
+                  {:hashes [trytes]}))
 
 (defn get-inclusion-states 
   [host {:keys [transactions tips] :as params}] 
@@ -109,15 +109,15 @@
 
 (defn broadcast-transactions
   "@param transactions : List of raw data of transactions to be rebroadcast."
-  [host {:keys [transactions]}] 
+  [host [transactions]] 
   (build-iota-req {:host host
                    :command "broadcastTransactions"}
-                  {:trytes transactions}))
+                  {:trytes [transactions]}))
 
 (defn store-transactions  
   "@param transactions : List of raw data of transactions to store locally."
-  [host {:keys [transactions]}] 
+  [host [transactions]] 
   (build-iota-req {:host host
                    :command "storeTransactions"}
-                  {:trytes transactions}))
+                  {:trytes [transactions]}))
 

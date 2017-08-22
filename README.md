@@ -33,15 +33,15 @@ lein clean && lein install
 
 > (iota/get-neighbors my-node)
 
-> (iota/add-neighbors my-node {:addresses ["udp://good.neighbor:14265" ...] })
+> (iota/add-neighbors my-node ["udp://good.neighbor:14265" ...])
 
-> (iota/remove-neighbors my-node {:addresses ["udp://bad.neighbor:14265" ...] })
+> (iota/remove-neighbors my-node ["udp://bad.neighbor:14265" ...])
 
 > (iota/get-tips my-node)
 
-> (iota/find-transactions my-node {:addresses ["RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM"]})
+> (iota/find-transactions my-node {:addresses ["SOMEIOTAHASHADDRESS..." ...]})
 
-> (iota/get-trytes my-node {:trytes ["OAATQS9VQLSXCLDJVJJVYUGONXAXOFMJOZNSYWRZSWECMXAQQURHQBJNLD9IOFEPGZEPEMPXCIVRX9999"]})
+> (iota/get-trytes my-node ["SOMEIOTATRYTES...999"])
 
 > (iota/get-inclusion-states my-node {:transactions ["..." ...] :tips ["..." ...]}
 
@@ -53,9 +53,9 @@ lein clean && lein install
 
 > (iota/interrupt-attaching-to-tangle my-node)
 
-> (iota/broadcast-transactions my-node {:transactions ["..." ...]})
+> (iota/broadcast-transactions my-node ["SOMETXHASH..." ...])
 
-> (iota/store-transactions my-node {:transactions ["..." ...]})
+> (iota/store-transactions my-node ["SOMETXHASH..." ...])
 ```
 
 [read the API Docs](https://iota.readme.io)

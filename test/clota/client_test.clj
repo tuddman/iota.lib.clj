@@ -25,7 +25,7 @@
 (deftest test-add-neighbors
   (let [host test-node
         neighbor ci-host-neighbor
-        added-neighbor-resp (add-neighbors host {:addresses [neighbor]})
+        added-neighbor-resp (add-neighbors host [neighbor])
         neighbors (map :address (:neighbors (get-neighbors test-node)))]
   (testing "does a neighbor get added"
     #_(is (= 1 (:addedNeighbors added-neighbor-resp)))
@@ -34,7 +34,7 @@
 (deftest test-remove-neighbors
   (let [host test-node
         neighbor ci-host-neighbor
-        remove-neighbor-resp (remove-neighbors host {:addresses [neighbor]})
+        remove-neighbor-resp (remove-neighbors host [neighbor])
         neighbors (map :address (:neighbors (get-neighbors test-node)))]
   (testing "does a neighbor get removed"
     #_(is (= 1 (:removedNeighbors remove-neighbor-resp)))
