@@ -30,28 +30,42 @@ lein clean && lein install
 > (def my-node "http://0.0.0.0:14625")
 
 > (iota/get-node-info my-node)
+
 > (iota/get-neighbors my-node)
+
 > (iota/add-neighbors my-node {:addresses ["udp://good.neighbor:14265" ...] })
+
 > (iota/remove-neighbors my-node {:addresses ["udp://bad.neighbor:14265" ...] })
+
 > (iota/get-tips my-node)
+
 > (iota/find-transactions my-node {:addresses ["RVORZ9SIIP9RCYMREUIXXVPQIPHVCNPQ9HZWYKFWYWZRE9JQKG9REPKIASHUUECPSQO9JT9XNMVKWYGVAZETAIRPTM"]})
+
 > (iota/get-trytes my-node {:trytes ["OAATQS9VQLSXCLDJVJJVYUGONXAXOFMJOZNSYWRZSWECMXAQQURHQBJNLD9IOFEPGZEPEMPXCIVRX9999"]})
+
 > (iota/get-inclusion-states my-node {:transactions ["..." ...] :tips ["..." ...]}
+
 > (iota/get-balances my-node {:addresses ["..." ...] :threshold 100})
+
 > (iota/get-transactions-to-approve my-node {:depth 27})
+
 > (iota/attach-to-tangle my-node {:trunkTransaction "..." :branchTransaction "..." :min-weight-magnitude 18 :trytes ["..." ...]})
+
 > (iota/interrupt-attaching-to-tangle my-node)
+
 > (iota/broadcast-transactions my-node {:transactions ["..." ...]})
+
 > (iota/store-transactions my-node {:transactions ["..." ...]})
 ```
+
+[read the API Docs](https://iota.readme.io)
 
 API Command | Clota Function | Status | Test Coverage
 --- | --- | --- | ---
 [getNodeInfo](https://iota.readme.io/docs/getnodeinfo) | `(get-node-info ...)` | Implemented | Complete
 [getNeighbors](https://iota.readme.io/docs/getneighborsactivity) | `(get-neighbors ...)` | Implemented | Complete
-[addNeighbors](https://iota.readme.io/docs/addneighbors) | `(add-neighbors ...)` | Implemented | None
-[removeNeighbors](https://iota.readme.io/docs/getnodeinfo) | `(remove-neighbors ...)` | Implemented | None
-[getTips](https://iota.readme.io/docs/gettips) | `(get-tips ...)` | Implemented | None
+[removeNeighbors](https://iota.readme.io/docs/getnodeinfo) | `(remove-neighbors ...)` | Implemented | Complete
+[getTips](https://iota.readme.io/docs/gettips) | `(get-tips ...)` | Implemented | Complete
 [findTransactions](https://iota.readme.io/docs/findtransactions) | `(find-transactions ...)` | Implemented | None
 [getTrytes](https://iota.readme.io/docs/gettrytes) | `(get-trytes ...)` | Implemented | None
 [getInclusionStates](https://iota.readme.io/docs/getinclusionstates) | `(get-inclusion-states ...)` | Implemented | None
@@ -64,7 +78,6 @@ API Command | Clota Function | Status | Test Coverage
 
 for more, look in `src/clota/client.clj`
 
-[read the API Docs](https://iota.readme.io)
 
 ## Testing
 
