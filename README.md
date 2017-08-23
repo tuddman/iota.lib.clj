@@ -56,6 +56,7 @@ lein clean && lein install
 > (iota/broadcast-transactions my-node ["SOMETXHASH..." ...])
 
 > (iota/store-transactions my-node ["SOMETXHASH..." ...])
+
 ```
 
 [read the API Docs](https://iota.readme.io)
@@ -78,6 +79,16 @@ API Command | Clota Function | Status | Test Coverage
 
 for more, look in `src/clota/client.clj`
 
+### Generate a Secure Random Seed 
+
+```clojure
+;; PLEASE BE ADVISED : DO NOT SHARE YOUR PRIVATE SEED WITH ANYONE. EVER!
+;; To Generate a Secure Random Seed:
+
+> (clota.crypto/generate-seed)
+
+ =>  "9KHKESVOHBOMHCL9ADINALYVHSBKRHITKMOJJJHFKOHWBZDFQDVLKQMTVZTUTWHIWXISBRIFXPZEEZTUU" 
+```
 
 ## Testing
 
