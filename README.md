@@ -12,6 +12,12 @@ Show your support for this library and this emerging protocol by giving this rep
 
 ## Getting Started
 
+Get Clota from clojars:
+
+[![Clojars Project](https://img.shields.io/clojars/v/clota.svg)](https://clojars.org/clota)
+
+or download and install directly:
+
 ```bash
 git clone https://github.com/tuddman/iota.lib.clj
 cd iota.lib.clj

@@ -1,4 +1,4 @@
-(defproject clota "0.1.0-SNAPSHOT"
+(defproject clota "0.1.0"
   :description "Clota - IOTA Library Implemented in Clojure"
   :url "https://github.com/tuddman/iota.lib.clj"
   :license {:name "Eclipse Public License"
