@@ -94,6 +94,13 @@ for more, look in `src/clota/client.clj`
 > (clota.crypto/generate-seed)
 
  =>  "9KHKESVOHBOMHCL9ADINALYVHSBKRHITKMOJJJHFKOHWBZDFQDVLKQMTVZTUTWHIWXISBRIFXPZEEZTUU" 
+
+;; Or, if that's not good enough for 'ya, 
+;; and you want to do some more randomized matrix math to generate your seed:
+
+> (clota.crypto/generate-paranoid-seed)
+
+ =>  "IKAGOIVHXAR9XRJMC9LIXHMFAXYAAXKSAXJE99ODVRMISXWNJIIGGVCQIKLVHMRQRQKESJDESRSQOUZTA"
 ```
 
 ## Testing
