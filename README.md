@@ -33,35 +33,39 @@ lein clean && lein install
 
 ;; Commands - from a REPL
 
-> (def my-node "http://0.0.0.0:14625")
+> (def node-uri "http://0.0.0.0:14625")
 
-> (iota/get-node-info my-node)
+;; OPTIONAL - if you have REMOTE_AUTH set for the node. If so, you will need to send the token along with every command.
 
-> (iota/get-neighbors my-node)
+> (def token (iota/->base64 "user:password")
 
-> (iota/add-neighbors my-node ["udp://good.neighbor:14265" ...])
+> (iota/get-node-info node-uri token)
 
-> (iota/remove-neighbors my-node ["udp://bad.neighbor:14265" ...])
+> (iota/get-neighbors node-uri token)
 
-> (iota/get-tips my-node)
+> (iota/add-neighbors node-uri ["udp://good.neighbor:14265" ...] token)
 
-> (iota/find-transactions my-node {:addresses ["SOMEIOTAHASHADDRESS..." ...]})
+> (iota/remove-neighbors node-uri ["udp://bad.neighbor:14265" ...] token)
 
-> (iota/get-trytes my-node ["SOMEIOTATRYTES...999"])
+> (iota/get-tips node-uri token)
 
-> (iota/get-inclusion-states my-node {:transactions ["..." ...] :tips ["..." ...]}
+> (iota/find-transactions node-uri {:addresses ["SOMEIOTAHASHADDRESS..." ...]} token)
 
-> (iota/get-balances my-node {:addresses ["..." ...] :threshold 100})
+> (iota/get-trytes node-uri ["SOMEIOTATRYTES...999"] token)
 
-> (iota/get-transactions-to-approve my-node {:depth 27})
+> (iota/get-inclusion-states node-uri {:transactions ["..." ...] :tips ["..." ...]} token)
 
-> (iota/attach-to-tangle my-node {:trunkTransaction "..." :branchTransaction "..." :min-weight-magnitude 18 :trytes ["..." ...]})
+> (iota/get-balances node-uri {:addresses ["..." ...] :threshold 100} token)
 
-> (iota/interrupt-attaching-to-tangle my-node)
+> (iota/get-transactions-to-approve node-uri {:depth 27} token)
 
-> (iota/broadcast-transactions my-node ["SOMETXHASH..." ...])
+> (iota/attach-to-tangle node-uri {:trunkTransaction "..." :branchTransaction "..." :min-weight-magnitude 18 :trytes ["..." ...]} token)
 
-> (iota/store-transactions my-node ["SOMETXHASH..." ...])
+> (iota/interrupt-attaching-to-tangle node-uri token)
+
+> (iota/broadcast-transactions node-uri ["SOMETXHASH..." ...] token)
+
+> (iota/store-transactions node-uri ["SOMETXHASH..." ...] token)
 
 ```
 
