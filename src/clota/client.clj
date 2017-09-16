@@ -139,7 +139,7 @@
 
 (defn interrupt-attaching-to-tangle  
   "@param { String } host" 
-  [host & [token] token] 
+  [host & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "interruptAttachingToTangle"}))
