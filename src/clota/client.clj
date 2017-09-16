@@ -36,14 +36,14 @@
 
 (defn get-node-info 
   "@param { String } host" 
-  [host token]          
+  [host & [token]]          
   (build-iota-req {:host host
                    :token token
                    :command "getNodeInfo"}))
 
 (defn get-neighbors 
   "@param { String } host" 
-  [host token] 
+  [host & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getNeighbors"}))
@@ -51,7 +51,7 @@
 (defn add-neighbors 
   "@param { String } host 
    @param { Vector of Strings } uris"
- [host [uris] token] 
+ [host [uris] & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "addNeighbors"}
@@ -60,7 +60,7 @@
 (defn remove-neighbors
   "@param { String } host 
    @param { Vector of Strings } uris" 
-  [host [uris] token] 
+  [host [uris] & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "removeNeighbors"}
@@ -68,7 +68,7 @@
 
 (defn get-tips 
   "@param { String } host" 
-  [host token] 
+  [host & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getTips"}))
@@ -85,7 +85,7 @@
    e.g. (find-transaction host {:addresses [AA9... AB9...]}d
    @param { String } host 
    @param { Map } :bundles :addresses :tags :approvees" 
-  [host inputs token] 
+  [host inputs & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "findTransactions"}
@@ -94,7 +94,7 @@
 (defn get-trytes 
   "@param { String } host
    @param { Vector of Strings } trytes : List of transaction hashes of which you want to get trytes from."
-  [host [trytes] token] 
+  [host [trytes] & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getTrytes"}
@@ -102,7 +102,7 @@
 
 (defn get-inclusion-states 
   "@param { String } host" 
-  [host {:keys [transactions tips] :as params} token] 
+  [host {:keys [transactions tips] :as params} & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getInclusionStates"}
@@ -110,7 +110,7 @@
 
 (defn get-balances 
   "@param { String } host" 
-  [host {:keys [addresses threshold] :as params} token] 
+  [host {:keys [addresses threshold] :as params} & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getBalances"}
@@ -119,7 +119,7 @@
 (defn get-transactions-to-approve 
   "@param { String } host
    @param { Map } :depth" 
-  [host {:keys [depth] :as params} token] 
+  [host {:keys [depth] :as params} & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "getTransactionsToApprove"}
@@ -128,7 +128,7 @@
 (defn attach-to-tangle 
   "@param { String } host 
    @param { Map } :trunk-transaction :branch-transaction :min-weight-magnitude :trytes)" 
-  [host {:keys [trunk-transaction branch-transaction min-weight-magnitude trytes] :as params} token] 
+  [host {:keys [trunk-transaction branch-transaction min-weight-magnitude trytes] :as params} & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "attachToTangle"}
@@ -139,7 +139,7 @@
 
 (defn interrupt-attaching-to-tangle  
   "@param { String } host" 
-  [host token] 
+  [host & [token] token] 
   (build-iota-req {:host host
                    :token token
                    :command "interruptAttachingToTangle"}))
@@ -147,7 +147,7 @@
 (defn broadcast-transactions
   "@param { String } host 
    @param { Vector of Strings } transactions : List of raw data of transactions to be rebroadcast."
-  [host [transactions] token] 
+  [host [transactions] & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "broadcastTransactions"}
@@ -155,7 +155,7 @@
 
 (defn store-transactions  
   "@param { Vector } transactions : List of raw data of transactions to store locally."
-  [host [transactions] token] 
+  [host [transactions] & [token]] 
   (build-iota-req {:host host
                    :token token
                    :command "storeTransactions"}
