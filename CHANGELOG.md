@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.2 
+### Added
+- generate seed QR codes
+
 ## [0.1.1] - 2017-09-15
 ### Added
 - Authenticated (token) Requests
