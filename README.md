@@ -7,9 +7,6 @@ This library aims to be an idiomatic, feature-complete, client implementation of
 <br>
 Show your support for this library and this emerging protocol by giving this repo a **star**
 
-[![Build Status](https://travis-ci.org/tuddman/iota.lib.clj.svg?branch=master)](https://travis-ci.org/tuddman/iota.lib.clj)
-
-
 ## Getting Started
 
 Get Clota from clojars:
@@ -110,6 +107,9 @@ for more, look in `src/clota/client.clj`
 ## Testing
 
 Continuous Integration Tests are provided by [Travis CI.](https://travis-ci.com/)
+
+[![Build Status](https://travis-ci.org/tuddman/iota.lib.clj.svg?branch=master)](https://travis-ci.org/tuddman/iota.lib.clj)
+
 
 To run the tests yourself:
 
