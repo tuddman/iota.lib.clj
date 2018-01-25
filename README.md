@@ -115,18 +115,14 @@ To run the tests yourself:
 ```bash
 $ lein test
 ```
-<br>
 
 
 Pull Requests Welcome.
-<br>
-
-[![Build Status](https://travis-ci.org/tuddman/iota.lib.clj.svg?branch=master)](https://travis-ci.org/tuddman/iota.lib.clj)
 
 
 ---
 
-Copyright © 2017-now tuddman
+Copyright © 2017 - now tuddman
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
