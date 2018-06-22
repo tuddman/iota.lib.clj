@@ -17,9 +17,9 @@
 
 ;; from https://iota.readme.io/docs
 
-(defn get-iota-version [] (json/encode {:version "1.2.0"}))
+(defn get-iota-version [] (json/encode {:version "1.4.2.4"}))
 
-(defn- build-iota-req
+(defn- iota-request
   "params 
     - command { String }
     - params { Map } Optional "
@@ -27,7 +27,8 @@
   (let [body (json/encode (merge {:command command} (or params {})))
         req (try (client/post (str host)
                               {:body body
-                               :headers {"Authorization" (str "Basic " token)}
+                               :headers {"Authorization" (str "Basic " token)
+                                         "X-IOTA-API-VERSION" "1.4.2.4"}
                                :content-type :json })
                  (catch Exception e (ex-data e)))]
     (-> req
@@ -37,14 +38,14 @@
 (defn get-node-info 
   "@param { String } host" 
   [host & [token]]          
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getNodeInfo"}))
 
 (defn get-neighbors 
   "@param { String } host" 
   [host & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getNeighbors"}))
 
@@ -52,7 +53,7 @@
   "@param { String } host 
    @param { Vector of Strings } uris"
  [host [uris] & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "addNeighbors"}
                   {:uris [uris]}))
@@ -61,7 +62,7 @@
   "@param { String } host 
    @param { Vector of Strings } uris" 
   [host [uris] & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "removeNeighbors"}
                   {:uris [uris]}))
@@ -69,7 +70,7 @@
 (defn get-tips 
   "@param { String } host" 
   [host & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getTips"}))
 
@@ -86,7 +87,7 @@
    @param { String } host 
    @param { Map } :bundles :addresses :tags :approvees" 
   [host inputs & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "findTransactions"}
                   inputs))
@@ -95,7 +96,7 @@
   "@param { String } host
    @param { Vector of Strings } trytes : List of transaction hashes of which you want to get trytes from."
   [host [trytes] & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getTrytes"}
                   {:hashes [trytes]}))
@@ -103,7 +104,7 @@
 (defn get-inclusion-states 
   "@param { String } host" 
   [host {:keys [transactions tips] :as params} & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getInclusionStates"}
                   params))
@@ -111,7 +112,7 @@
 (defn get-balances 
   "@param { String } host" 
   [host {:keys [addresses threshold] :as params} & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getBalances"}
                   params))
@@ -120,7 +121,7 @@
   "@param { String } host
    @param { Map } :depth" 
   [host {:keys [depth] :as params} & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "getTransactionsToApprove"}
                   params))
@@ -129,7 +130,7 @@
   "@param { String } host 
    @param { Map } :trunk-transaction :branch-transaction :min-weight-magnitude :trytes)" 
   [host {:keys [trunk-transaction branch-transaction min-weight-magnitude trytes] :as params} & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "attachToTangle"}
                   {:trunkTransaction trunk-transaction
@@ -140,7 +141,7 @@
 (defn interrupt-attaching-to-tangle  
   "@param { String } host" 
   [host & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "interruptAttachingToTangle"}))
 
@@ -148,7 +149,7 @@
   "@param { String } host 
    @param { Vector of Strings } transactions : List of raw data of transactions to be rebroadcast."
   [host [transactions] & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "broadcastTransactions"}
                   {:trytes [transactions]}))
@@ -156,7 +157,7 @@
 (defn store-transactions  
   "@param { Vector } transactions : List of raw data of transactions to store locally."
   [host [transactions] & [token]] 
-  (build-iota-req {:host host
+  (iota-request {:host host
                    :token token
                    :command "storeTransactions"}
                   {:trytes [transactions]}))
