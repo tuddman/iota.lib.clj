@@ -4,8 +4,6 @@ An [IOTA](https://iota.org) Client Library Implemented in Clojure
 
 This library aims to be an idiomatic, feature-complete, client implementation of the full IOTA API Command Set.
 
-Show your support for this library and this emerging protocol by giving this repo a **star**
-
 ## Getting Started
 
 Get Clota from clojars:
@@ -120,9 +118,11 @@ $ lein test
 Pull Requests Welcome.
 
 
+Donate:  F99IWXVIZPSXTDT9YUMHRAIGKXDQAUZCXWQJZWM9SIIOOFDHGEGCJVZOJJHMAZISPKVUYNUJQLANFXOMWNHNFJKPOB
+
 ---
 
-Copyright © 2017 - now tuddman
+Copyright © 2018 - now tuddman
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
