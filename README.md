@@ -31,7 +31,7 @@ lein clean && lein install
 
 ;; OPTIONAL - if you have REMOTE_AUTH set for the node. If so, you will need to send the token along with every command.
 
-> (def token (iota/->base64 "user:password")
+> (def token (iota/make-auth-token "user:password")
 
 > (iota/get-node-info node-uri token)
 

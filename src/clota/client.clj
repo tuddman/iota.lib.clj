@@ -1,12 +1,11 @@
 (ns clota.client
-  (:require  
-    [base64-clj.core :as base64]
-    [clojure.spec.alpha :as s]
-    [cheshire.core :as json]
-    [clj-http.client :as client]))
+  (:require
+   [base64-clj.core :as base64]
+   [clojure.spec.alpha :as s]
+   [cheshire.core :as json]
+   [clj-http.client :as client]))
 
-
-(defn ->base64
+(defn make-auth-token
   [s]
   (base64/encode s))
 
@@ -29,52 +28,52 @@
                               {:body body
                                :headers {"Authorization" (str "Basic " token)
                                          "X-IOTA-API-VERSION" "1.4.2.4"}
-                               :content-type :json })
+                               :content-type :json})
                  (catch Exception e (ex-data e)))]
     (-> req
         :body
         (json/decode true))))
 
-(defn get-node-info 
-  "@param { String } host" 
-  [host & [token]]          
+(defn get-node-info
+  "@param { String } host"
+  [host & [token]]
   (iota-request {:host host
                  :token token
                  :command "getNodeInfo"}))
 
-(defn get-neighbors 
-  "@param { String } host" 
-  [host & [token]] 
+(defn get-neighbors
+  "@param { String } host"
+  [host & [token]]
   (iota-request {:host host
                  :token token
                  :command "getNeighbors"}))
 
-(defn add-neighbors 
+(defn add-neighbors
   "@param { String } host 
    @param { Vector of Strings } uris"
- [host [uris] & [token]] 
+  [host [uris] & [token]]
   (iota-request {:host host
                  :token token
                  :command "addNeighbors"}
-                 {:uris [uris]}))
+                {:uris [uris]}))
 
 (defn remove-neighbors
   "@param { String } host 
-   @param { Vector of Strings } uris" 
-  [host [uris] & [token]] 
+   @param { Vector of Strings } uris"
+  [host [uris] & [token]]
   (iota-request {:host host
                  :token token
                  :command "removeNeighbors"}
-                 {:uris [uris]}))
+                {:uris [uris]}))
 
-(defn get-tips 
-  "@param { String } host" 
-  [host & [token]] 
+(defn get-tips
+  "@param { String } host"
+  [host & [token]]
   (iota-request {:host host
                  :token token
                  :command "getTips"}))
 
-(defn find-transactions 
+(defn find-transactions
   "find-transactions can take as inputs a map of one or more of:
     - bundles [...] : List of bundle hashes. The hashes needs to be extended to 81 trytes by padding the hash with 9's.
     - addresses [...]  : List of addresses.
@@ -85,62 +84,62 @@
   
    e.g. (find-transaction host {:addresses [AA9... AB9...]}d
    @param { String } host 
-   @param { Map } :bundles :addresses :tags :approvees" 
-  [host inputs & [token]] 
+   @param { Map } :bundles :addresses :tags :approvees"
+  [host inputs & [token]]
   (iota-request {:host host
                  :token token
                  :command "findTransactions"}
-                 inputs))
- 
-(defn get-trytes 
+                inputs))
+
+(defn get-trytes
   "@param { String } host
    @param { Vector of Strings } trytes : List of transaction hashes of which you want to get trytes from."
-  [host [trytes] & [token]] 
+  [host [trytes] & [token]]
   (iota-request {:host host
                  :token token
                  :command "getTrytes"}
-                 {:hashes [trytes]}))
+                {:hashes [trytes]}))
 
-(defn get-inclusion-states 
-  "@param { String } host" 
-  [host {:keys [transactions tips] :as params} & [token]] 
+(defn get-inclusion-states
+  "@param { String } host"
+  [host {:keys [transactions tips] :as params} & [token]]
   (iota-request {:host host
                  :token token
                  :command "getInclusionStates"}
-                 params))
+                params))
 
-(defn get-balances 
-  "@param { String } host" 
-  [host {:keys [addresses threshold] :as params} & [token]] 
+(defn get-balances
+  "@param { String } host"
+  [host {:keys [addresses threshold] :as params} & [token]]
   (iota-request {:host host
                  :token token
                  :command "getBalances"}
-                 params))
+                params))
 
-(defn get-transactions-to-approve 
+(defn get-transactions-to-approve
   "@param { String } host
-   @param { Map } :depth" 
-  [host {:keys [depth] :as params} & [token]] 
+   @param { Map } :depth"
+  [host {:keys [depth] :as params} & [token]]
   (iota-request {:host host
                  :token token
                  :command "getTransactionsToApprove"}
-                 params))
+                params))
 
-(defn attach-to-tangle 
+(defn attach-to-tangle
   "@param { String } host 
-   @param { Map } :trunk-transaction :branch-transaction :min-weight-magnitude :trytes)" 
-  [host {:keys [trunk-transaction branch-transaction min-weight-magnitude trytes] :as params} & [token]] 
+   @param { Map } :trunk-transaction :branch-transaction :min-weight-magnitude :trytes)"
+  [host {:keys [trunk-transaction branch-transaction min-weight-magnitude trytes] :as params} & [token]]
   (iota-request {:host host
                  :token token
                  :command "attachToTangle"}
-                 {:trunkTransaction trunk-transaction
-                  :branchTransaction branch-transaction
-                  :minWeightMagnitude min-weight-magnitude
-                  :trytes trytes}))
+                {:trunkTransaction trunk-transaction
+                 :branchTransaction branch-transaction
+                 :minWeightMagnitude min-weight-magnitude
+                 :trytes trytes}))
 
-(defn interrupt-attaching-to-tangle  
-  "@param { String } host" 
-  [host & [token]] 
+(defn interrupt-attaching-to-tangle
+  "@param { String } host"
+  [host & [token]]
   (iota-request {:host host
                  :token token
                  :command "interruptAttachingToTangle"}))
@@ -148,17 +147,16 @@
 (defn broadcast-transactions
   "@param { String } host 
    @param { Vector of Strings } transactions : List of raw data of transactions to be rebroadcast."
-  [host [transactions] & [token]] 
+  [host [transactions] & [token]]
   (iota-request {:host host
                  :token token
                  :command "broadcastTransactions"}
-                 {:trytes [transactions]}))
+                {:trytes [transactions]}))
 
-(defn store-transactions  
+(defn store-transactions
   "@param { Vector } transactions : List of raw data of transactions to store locally."
-  [host [transactions] & [token]] 
+  [host [transactions] & [token]]
   (iota-request {:host host
                  :token token
                  :command "storeTransactions"}
-                 {:trytes [transactions]}))
-
+                {:trytes [transactions]}))
