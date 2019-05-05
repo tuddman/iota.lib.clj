@@ -16,7 +16,7 @@
 
 ;; from https://iota.readme.io/docs
 
-(defn get-iota-version [] (json/encode {:version "1.4.2.4"}))
+(def iri-version  "v1.7.0-RELEASE")
 
 (defn- iota-request
   "params 
@@ -27,7 +27,7 @@
         req (try (client/post (str host)
                               {:body body
                                :headers {"Authorization" (str "Basic " token)
-                                         "X-IOTA-API-VERSION" "1.4.2.4"}
+                                         "X-IOTA-API-VERSION" iri-version}
                                :content-type :json})
                  (catch Exception e (ex-data e)))]
     (-> req
